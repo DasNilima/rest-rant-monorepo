@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react"
-// import { useHistory } from "react-router"
 import { CurrentUser } from '../contexts/CurrentUser'
 
 function NewCommentForm({ place, onSubmit }) {
@@ -22,7 +21,7 @@ function NewCommentForm({ place, onSubmit }) {
             setAuthors(users)
         }
         fetchData()
-    }, [])
+    })
 
     let authorOptions = authors.map(author => {
         return <option key={author.userId} value={author.userId}>{author.firstName} {author.lastName}</option>

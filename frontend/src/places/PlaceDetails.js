@@ -110,7 +110,20 @@ function PlaceDetails() {
 			)
 		})
 	}
+	let placeActions = null
 
+	if (currentUser?.role === 'admin') {
+		placeActions = (
+			<>
+				<a className="btn btn-warning" onClick={editPlace}>
+					Edit
+				</a>{` `}
+				<button type="submit" className="btn btn-danger" onClick={deletePlace}>
+					Delete
+				</button>
+			</>
+		)
+	}
 	return (
 		<main>
 			<div className="row">
@@ -137,35 +150,22 @@ function PlaceDetails() {
 						Serving {place.cuisines}.
 					</h4>
 					<br />
-					<a className="btn btn-warning" onClick={editPlace}>
-						Edit
-					</a>{` `}
-					<button type="submit" className="btn btn-danger" onClick={deletePlace}>
-						Delete
-					</button>
-				</div>
-			</div>
-			<hr />
-			<h2>Comments</h2>
-			<div className="row">
-				{comments}
-			</div>
-			<hr />
-			<h2>Got Your Own Rant or Rave?</h2>
-			<NewCommentForm
-				place={place}
-				onSubmit={createComment}
-			/>
-		</main>
+					{placeActions}
+					</div>
+					</div>
+					<hr />
+					<h2>Comments</h2>
+					<div className="row">
+						{comments}
+					</div>
+					<hr />
+					<h2>Got Your Own Rant or Rave?</h2>
+					<NewCommentForm
+						place={place}
+						onSubmit={createComment}
+					/>
+			</main>
 	)
 }
 
-
 export default PlaceDetails
-
-
-
-  
-
-
-  
