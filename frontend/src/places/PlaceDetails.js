@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useHistory, useParams } from "react-router"
+import { CurrentUser } from "../contexts/CurrentUser";
 import CommentCard from './CommentCard'
 import NewCommentForm from "./NewCommentForm";
 
@@ -8,6 +9,8 @@ function PlaceDetails() {
 	const { placeId } = useParams()
 
 	const history = useHistory()
+
+	const { currentUser } = useContext(CurrentUser)
 
 	const [place, setPlace] = useState(null)
 
@@ -34,7 +37,6 @@ function PlaceDetails() {
 		})
 		history.push('/places')
 	}
-
 	async function deleteComment(deletedComment) {
 		await fetch(`http://localhost:5001/places/${place.placeId}/comments/${deletedComment.commentId}`, {
 			method: 'DELETE'
@@ -46,18 +48,29 @@ function PlaceDetails() {
 				.filter(comment => comment.commentId !== deletedComment.commentId)
 		})
 	}
+	  
+    // async function deleteComment(deletedComment) {
+    // const response = await fetch(`http://localhost:5001/places/${place.placeId}/comments/${deletedComment.commentId}`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${localStorage.getItem('token')}`
+    //     },
+    //     body: JSON.stringify(commentAttributes)
+    // })
 
 	async function createComment(commentAttributes) {
 		const response = await fetch(`http://localhost:5001/places/${place.placeId}/comments`, {
 			method: 'POST',
 			headers: {
+				'Authorization': `Bearer ${localStorage.getItem('token')}`, // add JWT when making the fetch request that createa a new comment
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(commentAttributes)
 		})
-
+	
 		const comment = await response.json()
-
+	
 		setPlace({
 			...place,
 			comments: [
@@ -65,11 +78,8 @@ function PlaceDetails() {
 				comment
 			]
 		})
-
+	
 	}
-
-
-
 	let comments = (
 		<h3 className="inactive">
 			No comments yet!
@@ -100,7 +110,6 @@ function PlaceDetails() {
 			)
 		})
 	}
-
 
 	return (
 		<main>
@@ -151,4 +160,12 @@ function PlaceDetails() {
 	)
 }
 
+
 export default PlaceDetails
+
+
+
+  
+
+
+  
