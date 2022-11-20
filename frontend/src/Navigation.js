@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import { useHistory } from "react-router";
 import { CurrentUser } from './contexts/CurrentUser';
 
@@ -30,6 +30,18 @@ function Navigation() {
             </li>
         )
     }
+    //Hide admin buttons from non-admins
+    let addPlaceButton = null
+
+    if (currentUser?.role === 'admin') {
+        addPlaceButton = (
+            <li>
+                <a href="#" onClick={() => history.push("/places/new")}>
+                    Add Place
+                </a>
+            </li>
+        )
+    }
 
     return (
         <nav>
@@ -49,6 +61,7 @@ function Navigation() {
                         Add Place
                     </a>
                 </li>
+                {addPlaceButton}
                 {loginActions}
             </ul>
         </nav>
@@ -56,3 +69,10 @@ function Navigation() {
 }
 
 export default Navigation;
+
+
+
+  
+
+
+

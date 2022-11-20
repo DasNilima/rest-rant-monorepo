@@ -7,7 +7,8 @@ const { User } = db
 router.post('/', async (req, res) => {
     let { password, ...rest } = req.body;
     const user = await User.create({ 
-        ...rest, 
+        ...rest,
+        role: 'reviewer', // Restrict user access for signing up as an admin 
         passwordDigest: await bcrypt.hash(password, 10)
     })
     res.json(user)
@@ -20,3 +21,5 @@ router.get('/', async (req, res) => {
 })
 
 module.exports = router
+
+
