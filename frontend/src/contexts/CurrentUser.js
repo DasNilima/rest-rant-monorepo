@@ -7,7 +7,7 @@ function CurrentUserProvider({ children }) {
     useEffect(() => {
        //Fetch the current user on page load
        const getLoggedInUser = async () => {
-        let response = await fetch('http://localhost:5001/authentication/profile', {
+        let response = await fetch('http://localhost:5002/authentication/profile', {
             // Include the JWT in fetch requests
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`

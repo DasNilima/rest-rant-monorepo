@@ -18,7 +18,7 @@ function LoginForm() {
     async function handleSubmit(e) {
         e.preventDefault()
         console.log('credentials', credentials)
-        const response = await fetch(`http://localhost:5001/authentication/`, {
+        const response = await fetch(`http://localhost:5002/authentication/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

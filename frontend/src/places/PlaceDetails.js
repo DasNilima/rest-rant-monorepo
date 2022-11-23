@@ -16,7 +16,7 @@ function PlaceDetails() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch(`http://localhost:5001/places/${placeId}`)
+			const response = await fetch(`http://localhost:5002/places/${placeId}`)
 			const resData = await response.json()
 			setPlace(resData)
 		}
@@ -32,13 +32,13 @@ function PlaceDetails() {
 	}
 
 	async function deletePlace() {
-		await fetch(`http://localhost:5001/places/${place.placeId}`, {
+		await fetch(`http://localhost:5002/places/${place.placeId}`, {
 			method: 'DELETE'
 		})
 		history.push('/places')
 	}
 	async function deleteComment(deletedComment) {
-		await fetch(`http://localhost:5001/places/${place.placeId}/comments/${deletedComment.commentId}`, {
+		await fetch(`http://localhost:5002/places/${place.placeId}/comments/${deletedComment.commentId}`, {
 			method: 'DELETE'
 		})
 
@@ -48,7 +48,7 @@ function PlaceDetails() {
 				.filter(comment => comment.commentId !== deletedComment.commentId)
 		})
 	}
-	  
+
     // async function deleteComment(deletedComment) {
     // const response = await fetch(`http://localhost:5001/places/${place.placeId}/comments/${deletedComment.commentId}`, {
     //     method: 'POST',
@@ -60,10 +60,10 @@ function PlaceDetails() {
     // })
 
 	async function createComment(commentAttributes) {
-		const response = await fetch(`http://localhost:5001/places/${place.placeId}/comments`, {
+		const response = await fetch(`http://localhost:5002/places/${place.placeId}/comments`, {
 			method: 'POST',
 			headers: {
-				'Authorization': `Bearer ${localStorage.getItem('token')}`, // add JWT when making the fetch request that createa a new comment
+				'Authorization': `Bearer ${localStorage.getItem('token')}`, // add JWT when making the fetch request that create a new comment
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(commentAttributes)
@@ -115,9 +115,9 @@ function PlaceDetails() {
 	if (currentUser?.role === 'admin') {
 		placeActions = (
 			<>
-				<a className="btn btn-warning" onClick={editPlace}>
+				<button className="btn btn-warning" onClick={editPlace}>
 					Edit
-				</a>{` `}
+				</button>{` `}
 				<button type="submit" className="btn btn-danger" onClick={deletePlace}>
 					Delete
 				</button>
