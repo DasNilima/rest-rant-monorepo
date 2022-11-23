@@ -20,7 +20,7 @@ function PlaceIndex(data) {
 		return (
 			<div className="col-sm-6" key={place.placeId}>
 				<h2>
-					<a href="/places/{place.placeId}" onClick={() => history.push(`/places/${place.placeId}`)} >
+					<a href={`/places/${place.placeId}`} onClick={() => history.push(`/places/${place.placeId}`)} >
 						{place.name}
 					</a>
 				</h2>
