@@ -14,8 +14,8 @@ module.exports = {
      * }], {});
     */
      await queryInterface.bulkInsert('users', [{
-      first_name: 'YOUR FIRST NAME',
-      last_name: 'YOUR LAST NAME',
+      first_name: 'Nilima',
+      last_name: 'Das',
       email: 'admin@example.com',
       role: 'admin',
       password_digest: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),

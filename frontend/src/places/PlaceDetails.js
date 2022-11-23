@@ -115,9 +115,9 @@ function PlaceDetails() {
 	if (currentUser?.role === 'admin') {
 		placeActions = (
 			<>
-				<a className="btn btn-warning" onClick={editPlace}>
+				<button className="btn btn-warning" onClick={editPlace}>
 					Edit
-				</a>{` `}
+				</button>{` `}
 				<button type="submit" className="btn btn-danger" onClick={deletePlace}>
 					Delete
 				</button>
